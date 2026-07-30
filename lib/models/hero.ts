@@ -4,7 +4,7 @@ const heroSchema = new Schema(
   {
     backgroundImage: {
       type: String,
-      required: true,
+      default: "",
     },
 
     subTitle: {
@@ -21,31 +21,31 @@ const heroSchema = new Schema(
 
     description: {
       type: String,
-      required: true,
+      default: "",
       trim: true,
     },
 
     primaryButtonText: {
       type: String,
-      required: true,
+      default: "",
       trim: true,
     },
 
     primaryButtonLink: {
       type: String,
-      required: true,
+      default: "",
       trim: true,
     },
 
     secondaryButtonText: {
       type: String,
-      required: true,
+      default: "",
       trim: true,
     },
 
     secondaryButtonLink: {
       type: String,
-      required: true,
+      default: "",
       trim: true,
     },
 
@@ -82,6 +82,7 @@ const heroSchema = new Schema(
   }
 );
 
-export const HeroSection =
-  mongoose.models.HeroSection ||
-  mongoose.model("HeroSection", heroSchema);
+const Hero =
+  mongoose.models.Hero || mongoose.model("Hero", heroSchema);
+
+export default Hero;

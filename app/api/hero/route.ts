@@ -1,50 +1,26 @@
+import { NextRequest, NextResponse } from "next/server";
 import { connectToDB } from "@/lib/connectToDB";
-import { HeroSection } from "@/lib/models/hero";
-import { NextResponse } from "next/server";
+import Hero from "@/lib/models/hero";
 
-// Get All Hero Sections
+// Get All Hero
 export async function GET() {
-  try {
-    await connectToDB();
+  await connectToDB();
 
-    const heroes = await HeroSection.find().sort({ order: 1 });
+  const heroes = await Hero.find().sort({ order: 1 });
 
-    const response = NextResponse.json(heroes);
-    response.headers.set("Access-Control-Allow-Origin", "*");
-
-    return response;
-  } catch (error) {
-    console.error(error);
-
-    return NextResponse.json(
-      { message: "Failed to fetch hero sections" },
-      { status: 500 }
-    );
-  }
+  return NextResponse.json(heroes);
 }
 
-// Create Hero Section
-export async function POST(req: Request) {
-  try {
-    const data = await req.json();
+// Create Hero
+export async function POST(req: NextRequest) {
+  await connectToDB();
 
-    await connectToDB();
+  const data = await req.json();
 
-    const hero = await HeroSection.create(data);
+  const hero = await Hero.create(data);
 
-    return NextResponse.json(
-      {
-        message: "Hero section created successfully",
-        hero,
-      },
-      { status: 201 }
-    );
-  } catch (error) {
-    console.error(error);
-
-    return NextResponse.json(
-      { message: "Failed to create hero section" },
-      { status: 500 }
-    );
-  }
+  return NextResponse.json({
+    message: "Hero created successfully",
+    hero,
+  });
 }
