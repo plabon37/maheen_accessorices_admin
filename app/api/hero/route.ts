@@ -2,29 +2,48 @@ import { connectToDB } from "@/lib/connectToDB";
 import { HeroSection } from "@/lib/models/hero";
 import { NextResponse } from "next/server";
 
+// Get All Hero Sections
 export async function GET() {
-  await connectToDB();
-  const project = await HeroSection.find();
-  const response = NextResponse.json(project);
-  response.headers.set("Access-Control-Allow-Origin", "*");
-  return response;
+  try {
+    await connectToDB();
+
+    const heroes = await HeroSection.find().sort({ order: 1 });
+
+    const response = NextResponse.json(heroes);
+    response.headers.set("Access-Control-Allow-Origin", "*");
+
+    return response;
+  } catch (error) {
+    console.error(error);
+
+    return NextResponse.json(
+      { message: "Failed to fetch hero sections" },
+      { status: 500 }
+    );
+  }
 }
 
+// Create Hero Section
 export async function POST(req: Request) {
   try {
     const data = await req.json();
 
-    // Connect to the database
     await connectToDB();
-    await HeroSection.create(data);
+
+    const hero = await HeroSection.create(data);
+
     return NextResponse.json(
-      { message: "Data created" },
+      {
+        message: "Hero section created successfully",
+        hero,
+      },
       { status: 201 }
     );
   } catch (error) {
-    console.error("Error creating data:", error);
+    console.error(error);
+
     return NextResponse.json(
-      { message: "Failed to create data" },
+      { message: "Failed to create hero section" },
       { status: 500 }
     );
   }

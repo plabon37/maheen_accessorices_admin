@@ -1,19 +1,87 @@
-
 import mongoose, { Schema } from "mongoose";
 
-//Hero Section
 const heroSchema = new Schema(
   {
-    text: {
+    backgroundImage: {
+      type: String,
+      required: true,
+    },
+
+    subTitle: {
       type: String,
       required: true,
       trim: true,
     },
-    href: {
+
+    title: {
       type: String,
+      required: true,
       trim: true,
     },
+
+    description: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    primaryButtonText: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    primaryButtonLink: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    secondaryButtonText: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    secondaryButtonLink: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    facebook: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    instagram: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    linkedin: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    order: {
+      type: Number,
+      default: 1,
+    },
+
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
   },
-  { _id: false }
+  {
+    timestamps: true,
+  }
 );
-export const HeroSection = mongoose.models.HeroSection || mongoose.model("HeroSection", heroSchema);
+
+export const HeroSection =
+  mongoose.models.HeroSection ||
+  mongoose.model("HeroSection", heroSchema);
