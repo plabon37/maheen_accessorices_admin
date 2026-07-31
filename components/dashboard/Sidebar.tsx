@@ -25,6 +25,11 @@ const menuItems = [
     href: "/dashboard/hero",
     icon: Image,
   },
+   {
+    name: "Service",
+    href: "/dashboard/service",
+    icon: Image,
+  },
   {
     name: "Category",
     href: "/dashboard/category",
