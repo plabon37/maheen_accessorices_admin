@@ -31,6 +31,11 @@ const menuItems = [
     icon: Image,
   },
   {
+    name: "Album",
+    href: "/dashboard/album",
+    icon: Image,
+  },
+  {
     name: "Category",
     href: "/dashboard/category",
     icon: FolderTree,
